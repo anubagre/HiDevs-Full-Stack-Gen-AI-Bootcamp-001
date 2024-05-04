@@ -10,11 +10,6 @@ class contactDetails:
                 self.contact_details=pickle.load(f)
         except (FileNotFoundError, EOFError):
             self.contact_details = []
-    
-    def add_entry(self, Fname, LName, StreetAddress, City, State, Country, number, email):
-        if any(entry["number"] == number or entry["email"] == email for entry in self.data):
-            print("Error: Duplicate email or mobile number.")
-            return
 
     def add_contact(self):
         for i in range(3):
@@ -22,19 +17,19 @@ class contactDetails:
             if len(number)!=10:
                 print("Invalid Number")
                 continue
-            '''for entry in self.contact_details:
+            for entry in self.contact_details:
                 if entry["number"] == number:
                     print("Number Already Exists.")
-                    continue'''
+                    continue
             
             email= input("Enter email id:")
             if re.search("$@#.%",email)==False:
                 print("Invalid email")
 
-            '''for entry in self.contact_details:
+            for entry in self.contact_details:
                 if entry["email"] == email:
                     print("Email Already Exists.")
-                    continue'''
+                    continue
 
             name=input("Enter name in format-Firstname Lastname:") 
             try:
@@ -57,7 +52,7 @@ class contactDetails:
             except:
                 print("Invalid Input")
                 continue
-            
+
         entry = {
             "Fname": Fname,
             "LName": LName,
@@ -71,16 +66,6 @@ class contactDetails:
         self.contact_details.append(entry)
         with open("problem2_data_file.pickle","wb") as f:
             pickle.dump(self.contact_details, f)
-
-    '''def countFname(self,Fname):
-        return contact_details.count(Fname)
-        
-    
-    def countLname(self,Lname):
-        return contact_details.count(Lname)
-    
-    def countStreet(Street):
-        return contact_details.count(Street)'''
     
     def count_occurrences(self, field):
         counter = Counter(entry[field] for entry in self.contact_details)
